@@ -1,0 +1,62 @@
+
+tmp_produto = """"""
+
+usuario = """"""
+
+unidadeNegocio = """"""
+
+grupoRemarcacao = """"""
+
+principioAtivo = """"""
+
+fabricanteNaoInformado = """"""
+
+fabricante = """"""
+
+classficacao = """"""
+
+produto = """"""
+
+produtoMae = """"""
+
+codigoDeBarrasAdicional = """"""
+
+duploPerfilImcs = """"""
+
+impostoLucroPresumido = """"""
+
+impostoSimples = """"""
+
+fornencedor = """"""
+
+planoPagamento = """"""
+
+cadernoDeOferta = """"""
+
+cadernoDeOfertaQuantidade = """"""
+
+cadernoDeOfertaLevePague = """"""
+
+cadernoDeOfertaClassificacao = """"""
+
+cadernoDeOfertaUnidade = """"""
+
+crediario = """"""
+
+cliente = """"""
+
+dependenteCliente = """"""
+
+planoRemuneracao = """"""
+
+prescritores = """"""
+
+crediarioReceber = """"""
+
+custo = """"""
+
+estoque = """"""
+
+contasAPagar = """"""
+
+demanda = """"""
