@@ -43,7 +43,7 @@ INSERT INTO Imp_Usuario (
 SELECT 
   funcodigo||'.'||login AS ID,
   login AS Login,
-  '123' AS Senha,
+  '000' AS Senha,
   login AS Apelido
 FROM FUNUSU;"""
   
