@@ -3,7 +3,7 @@ import time
 from psycopg2 import sql, DatabaseError
 import psycopg2
 from database_connector import DatabaseConnector
-from script.query_infoMaster import ( tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, 
+from script.query_efetivo import ( tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, 
     produto, produtoMae, codigoDeBarrasAdicional,duploPerfilImcs,impostoLucroPresumido, impostoSimples, fornencedor, 
     planoPagamento, cadernoDeOferta, cadernoDeOfertaQuantidade,cadernoDeOfertaLevePague, cadernoDeOfertaClassificacao,cadernoDeOfertaUnidade, 
     crediario, cliente,  dependenteCliente, planoRemuneracao, prescritores, crediarioReceber, custo, estoque, contasAPagar, demanda )
