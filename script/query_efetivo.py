@@ -37,7 +37,7 @@ SELECT
 	uf AS estado
 FROM filiais"""
 
-grupoRemarcacao = """"""
+grupoRemarcacao = """select"""
 
 principioAtivo = """INSERT INTO imp_principioativo (
   ID,
