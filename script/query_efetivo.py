@@ -21,9 +21,9 @@ usuario = """INSERT INTO imp_usuario (
   Login,
   Apelido,
   Senha)
-SELECT
+SELECT distinct on (login)
 	cod_usu AS id,
-	COALESCE(login, nome) AS login,
+	COALESCE(NULLIF(login, ''), nome) AS login,
 	SUBSTRING(nome, 1, 30) AS apelido,
 	'123'
 FROM funcionarios"""
@@ -116,7 +116,7 @@ SELECT
 	COALESCE(imp_fabricante.id, '0') AS imp_fabricanteid,
 	ean13_1 AS codigobarras,
 	CASE
-		WHEN prod_estoque.cst_icms IN ('0', '2') THEN 'D' -- TRIBUTADO
+		WHEN prod_estoque.cst_icms IN ('0', '2','-1') THEN 'D' -- TRIBUTADO
 		WHEN prod_estoque.cst_icms IN ('5') THEN 'C' -- NÃO TRIBUTADO
 		WHEN prod_estoque.cst_icms IN ('4') THEN 'B' -- ISENTO
 		WHEN prod_estoque.cst_icms IN ('9') THEN 'A' -- SUBSTITUIDO
@@ -150,7 +150,7 @@ LEFT JOIN imp_classificacao ON imp_classificacao.id = prod_estoque.cod_grupo
 LEFT JOIN imp_produto ON imp_produto.id = produtos.cod_produto
 WHERE imp_produto.id IS NULL"""
 
-produtoMae = """"""
+produtoMae = """select"""
 
 codigoDeBarrasAdicional = """INSERT INTO imp_codigobarras (
   codigobarras,
@@ -168,11 +168,11 @@ WHERE imp_codigobarras.codigobarras IS NULL
 AND imppro.id IS NULL
 AND produtos.ean13_2 IS NOT NULL"""
 
-duploPerfilImcs = """"""
+duploPerfilImcs = """select"""
 
-impostoLucroPresumido = """"""
+impostoLucroPresumido = """select"""
 
-impostoSimples = """"""
+impostoSimples = """select"""
 
 fornencedor = """INSERT INTO imp_fornecedor (
   id,
@@ -280,11 +280,11 @@ WHERE preco_promocao::NUMERIC(15,2) > 0
   AND COALESCE(dt_venc_promocao, NOW() + INTERVAL '1' DAY) > NOW()
 ORDER BY 4;"""
 
-cadernoDeOfertaQuantidade = """"""
+cadernoDeOfertaQuantidade = """select"""
 
-cadernoDeOfertaLevePague = """"""
+cadernoDeOfertaLevePague = """select"""
 
-cadernoDeOfertaClassificacao = """"""
+cadernoDeOfertaClassificacao = """select"""
 
 cadernoDeOfertaUnidade = """-- UNIDADES DE NEGÓCIO DO CADERNO DE OFERTAS POR PREÇO OFERTA
 INSERT INTO imp_uncadernooferta (
@@ -507,7 +507,7 @@ JOIN imp_cliente ON imp_cliente.id = funcionarios.cod_usu||'.fun'
 LEFT JOIN imp_cliente_endereco ON imp_cliente_endereco.id = funcionarios.cod_usu
 WHERE imp_cliente_endereco.id IS NULL;"""
 
-dependenteCliente = """"""
+dependenteCliente = """select"""
 
 planoRemuneracao = """-- PLANO REMUNERAÇÃO
 INSERT INTO imp_planoremu (ID, Nome, DataInicial, DataFinal, ConsiderarDevolucao) VALUES ('PLANO DE REMUNERAÇÃO POR COMISSÃO', 'PLANO DE REMUNERAÇÃO POR COMISSÃO', NOW(), NOW() + INTERVAL '1 year', TRUE);
@@ -526,7 +526,7 @@ JOIN prod_estoque ON prod_estoque.cod_produto = produtos.cod_produto
 JOIN imp_produto ON imp_produto.id = produtos.cod_produto::VARCHAR
 WHERE prod_estoque.comissao::NUMERIC(15,2) > 0;"""
 
-prescritores = """"""
+prescritores = """select"""
 
 crediarioReceber = """-- CREDIARIOS RECEBER NORMAIS (CREDIARIOS/CONVENIOS SEM SER O PARTICULAR)
 INSERT INTO Imp_CrediarioReceber (
