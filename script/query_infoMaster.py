@@ -62,7 +62,7 @@ FROM empresa
 LEFT JOIN imp_unidadenegocio ON imp_unidadenegocio.id = empresa.emp_cod::VARCHAR
 WHERE imp_unidadenegocio.id IS NULL;"""
 
-grupoRemarcacao = """"""
+grupoRemarcacao = """select"""
 
 principioAtivo = """INSERT INTO imp_principioativo (
   ID,
@@ -298,9 +298,9 @@ WHERE ip.id IS NULL
   AND produto.pro_status = 'A'
   AND produto.pro_fracao > 1;"""
 
-codigoDeBarrasAdicional = """"""
+codigoDeBarrasAdicional = """select"""
 
-duploPerfilImcs = """"""
+duploPerfilImcs = """select"""
 
 impostoLucroPresumido = """-- LUCRO REAL - ||ATENÇÃO REALIZAR A VALIDAÇÃO|| 
 INSERT INTO imp_icmsproduto(
@@ -465,13 +465,13 @@ WHERE pro_preco <> PRO_A_PRAZO
 AND PRO_A_PRAZO > 0
 """
 
-cadernoDeOfertaQuantidade = """"""
+cadernoDeOfertaQuantidade = """select"""
 
-cadernoDeOfertaLevePague = """"""
+cadernoDeOfertaLevePague = """select"""
 
-cadernoDeOfertaClassificacao = """"""
+cadernoDeOfertaClassificacao = """select"""
 
-cadernoDeOfertaUnidade = """"""
+cadernoDeOfertaUnidade = """select"""
 
 crediario = """--CREDIÁRIO PARTICULAR
 INSERT INTO Imp_Crediario (ID, NomeCrediario, LimitePadraoCliente, Imp_PlanoPagamentoID) VALUES ('0', 'PARTICULAR', 0, '-1');
@@ -587,9 +587,9 @@ LEFT JOIN imp_cliente_endereco ON (cli_cod || '.' || enc_cod) = imp_cliente_ende
 WHERE imp_cliente_endereco.id IS NULL 
   AND enc_end IS NOT NULL;"""
 
-dependenteCliente = """"""
+dependenteCliente = """select"""
 
-planoRemuneracao = """"""
+planoRemuneracao = """select"""
 
 prescritores = """/* Cadastro dos Prescritores*/ 
 INSERT INTO Imp_Prescritor (
