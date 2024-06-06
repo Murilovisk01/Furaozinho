@@ -62,7 +62,7 @@ SELECT
     regexp_replace(empfone, '[^0-9]', '', 'g') AS Telefone
 FROM empresa"""
 
-grupoRemarcacao = """"""
+grupoRemarcacao = """select"""
 
 principioAtivo = """
 INSERT INTO Imp_PrincipioAtivo (
@@ -255,7 +255,7 @@ JOIN imp_produto ON imp_produto.id = produto.procodigo
 LEFT JOIN imp_codigobarras ON imp_codigobarras.codigobarras = SUBSTRING(regexp_replace(ltrim(procodbarra.codbarra, '0'), '[^0-9]','','g'), 1,14)
 WHERE imp_produto.codigobarras <> SUBSTRING(regexp_replace(ltrim(procodbarra.codbarra, '0'), '[^0-9]','','g'), 1,14)"""
 
-duploPerfilImcs = """"""
+duploPerfilImcs = """select"""
 
 impostoLucroPresumido = """-- Inserir na imp_icmsproduto
 INSERT INTO imp_icmsproduto(
@@ -537,11 +537,11 @@ LEFT JOIN pessoa ON pescliente.pescodigo = pessoa.pescodigo
 JOIN Imp_Cliente ON Imp_Cliente.ID = pescliente.pescodigo::VARCHAR
 WHERE pessoa.pesendereco IS NOT NULL"""
 
-dependenteCliente = """"""
+dependenteCliente = """select"""
 
-planoRemuneracao = """"""
+planoRemuneracao = """select"""
 
-prescritores = """"""
+prescritores = """select"""
 
 crediarioReceber = """INSERT INTO imp_crediarioreceber (
 	ID,
