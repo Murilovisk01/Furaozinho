@@ -34,7 +34,7 @@ def EscolhaSistema(source_db_config, sistema):
             efetivo_dia2(source_db_config)
         else:
             print("Opção inválida. Por favor, escolha novamente.")    
-    elif sistema.lower() == "3":
+    elif sistema.lower() == "4":
         sistema_infoMaster = SistemaInfoMaster(source_db_config)
         opcao = input("Qual DIA deseja realizar\n1 - DIA 01\n2 - DIA 02\n:  ")
         if opcao == '1':
