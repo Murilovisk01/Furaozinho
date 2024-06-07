@@ -70,7 +70,7 @@ def popular_dia1(source_db_config):
                 # Lista de consultas a serem executadas
                 queries = [
                 tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, 
-                produto, produtoMae, codigoDeBarrasAdicional,duploPerfilImcs,impostoLucroPresumido, impostoSimples, fornencedor, 
+                produto, produtoMae, codigoDeBarrasAdicional, fornencedor, 
                 planoPagamento, cadernoDeOferta, cadernoDeOfertaQuantidade,cadernoDeOfertaLevePague, cadernoDeOfertaClassificacao,cadernoDeOfertaUnidade, 
                 crediario, cliente,  dependenteCliente, planoRemuneracao, prescritores,
                 ]
