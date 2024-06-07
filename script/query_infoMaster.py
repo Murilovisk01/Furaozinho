@@ -404,7 +404,7 @@ WHERE imp_fornecedor_endereco.id IS NULL
 planoPagamento = """INSERT INTO imp_planopagamento(id,nome,minparcela,maxparcela,tipointervaloentrada,intervaloentrada,tipointervaloparcela,intervaloparcela) VALUES ('-1','PARTICULAR',1,1,'D','1','M','1');"""
 
 cadernoDeOferta = """--INSERINDO CADERNO DE OFERTA
-INSERT INTO imp_cadernooferta (id, nome, DataHoraInicial, DataHoraFinal) VALUES ('DESCONTO', 'DESCONTO', now(), now() + INTERVAL '1 year')
+INSERT INTO imp_cadernooferta (id, nome, DataHoraInicial, DataHoraFinal) VALUES ('DESCONTO', 'DESCONTO', now(), now() + INTERVAL '1 year');
 
 --INSERINDO ITENS CADERNO OFERTAS DO TIPO PREÇO
 INSERT INTO imp_itemcadernooferta (
@@ -421,10 +421,10 @@ FROM produto
 JOIN imp_produto ON imp_produto.id = produto.pro_cod::VARCHAR
 JOIN imp_cadernooferta ON imp_cadernooferta.id = 'DESCONTO'
 WHERE pro_preco <> pro_valor_desc_vista
-AND pro_valor_desc_vista > 0
+AND pro_valor_desc_vista > 0;
 
 --INSERINDO CADERNO DE OFERTA da tabela "pro_promo_v"
-INSERT INTO imp_cadernooferta (id, nome, DataHoraInicial, DataHoraFinal) VALUES ('DESCONTO_VENDA', 'DESCONTO_VENDA', now(), now() + INTERVAL '1 year')
+INSERT INTO imp_cadernooferta (id, nome, DataHoraInicial, DataHoraFinal) VALUES ('DESCONTO_VENDA', 'DESCONTO_VENDA', now(), now() + INTERVAL '1 year');
 
 
 --INSERINDO ITENS CADERNO OFERTAS DO TIPO PREÇO
@@ -442,10 +442,10 @@ FROM produto
 JOIN imp_produto ON imp_produto.id = produto.pro_cod::VARCHAR
 JOIN imp_cadernooferta ON imp_cadernooferta.id = 'DESCONTO_VENDA'
 WHERE pro_preco <> pro_promo_v
-AND pro_promo_v > 0
+AND pro_promo_v > 0;
 
 --INSERINDO CADERNO DE OFERTA da tabela "PRO_A_PRAZO"
-INSERT INTO imp_cadernooferta (id, nome, DataHoraInicial, DataHoraFinal) VALUES ('DESCONTO_A_PRAZO', 'DESCONTO_A_PRAZO', now(), now() + INTERVAL '1 year')
+INSERT INTO imp_cadernooferta (id, nome, DataHoraInicial, DataHoraFinal) VALUES ('DESCONTO_A_PRAZO', 'DESCONTO_A_PRAZO', now(), now() + INTERVAL '1 year');
 
 --INSERINDO ITENS CADERNO OFERTAS DO TIPO PREÇO
 INSERT INTO imp_itemcadernooferta (
@@ -462,7 +462,7 @@ FROM produto
 JOIN imp_produto ON imp_produto.id = produto.pro_cod::VARCHAR
 JOIN imp_cadernooferta ON imp_cadernooferta.id = 'DESCONTO_A_PRAZO'
 WHERE pro_preco <> PRO_A_PRAZO
-AND PRO_A_PRAZO > 0
+AND PRO_A_PRAZO > 0;
 """
 
 cadernoDeOfertaQuantidade = """select"""
@@ -580,7 +580,7 @@ SELECT
   NULLIF(TRIM(enc_cep),'') AS cep,
   COALESCE(NULLIF(TRIM(enc_bai),''), 'BAIRRO NÃO INFORMADO') AS bairro,
   COALESCE(NULLIF(UPPER(TRIM(enc_cid)),''), 'CIDADE NÃO INFORMADA') AS cidade,
-  COALESCE(NULLIF(UPPER(TRIM(enc_UF)),''), 'SP') AS estado
+  SUBSTRING(COALESCE(NULLIF(UPPER(TRIM(enc_UF)),''), 'SP'),1,2) AS estado
 FROM enderecos_cli
 JOIN imp_cliente ON enderecos_cli.cli_cod::VARCHAR = imp_cliente.id
 LEFT JOIN imp_cliente_endereco ON (cli_cod || '.' || enc_cod) = imp_cliente_endereco.id
@@ -602,7 +602,7 @@ INSERT INTO Imp_Prescritor (
 SELECT 
   med_cod AS id,
   COALESCE(NULLIF(TRIM(UPPER(REPLACE(med_nome,'''',''))),''),'NAO INFORMADO') AS nome,
-  TRIM(REPLACE(REPLACE(REPLACE(medico.med_crm,'.',''),'-',''),' ',''),'')::BIGINT AS numero,
+  TRIM(REPLACE(REPLACE(REPLACE(medico.med_crm,'.',''),'-',''),' ',''),'')::bigint AS numero,
    (CASE
     WHEN med_consprof = 'CRM' THEN 'M'
     WHEN med_consprof = 'CRMV' THEN 'V'
@@ -611,10 +611,11 @@ SELECT
     WHEN med_consprof = 'RMS' THEN 'R'
     ELSE 'M'
   END) AS tipoconselho,
-  NULLIF(TRIM(UPPER(med_cid)),'') AS cidade,
-  TRIM(UPPER(med_ufcrm))
+  NULLIF(TRIM(UPPER(med_cid::varchar)),'') AS cidade,
+  TRIM(UPPER(med_ufcrm)) as estado
 FROM MEDICO
-WHERE NULLIF(TRIM(REPLACE(REPLACE(REPLACE(medico.med_crm,'.',''),'-',''),' ','')),'') IS NOT NULL ;"""
+WHERE NULLIF(TRIM(REPLACE(REPLACE(REPLACE(medico.med_crm,'.',''),'-',''),' ','')),'') IS NOT NULL and 
+	TRIM(REGEXP_REPLACE(medico.med_crm, '[^0-9]', '', 'g')) <> '';"""
 
 crediarioReceber = """INSERT INTO imp_crediarioreceber (
   id,
