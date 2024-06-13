@@ -19,7 +19,7 @@ usuario = """INSERT INTO imp_usuario (
 SELECT
   fun_cod AS id,
   SUBSTRING(UPPER(COALESCE(NULLIF(TRIM(fun_login),''),fun_nome)),0,100) AS login,
-  '1234' AS senha,
+  '123' AS senha,
   SUBSTRING(UPPER(COALESCE(NULLIF(TRIM(fun_nome),''),fun_login)),0,30) AS apelido
 FROM funcionario
 LEFT JOIN imp_usuario ON funcionario.fun_cod::VARCHAR = imp_usuario.id
