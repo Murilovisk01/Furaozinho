@@ -14,8 +14,7 @@ FROM vendacheckout
 JOIN estoque ON estoque.produtoid = vendacheckout.procodigo
 WHERE vendacheckout.vdcdata::TIMESTAMP > now() - INTERVAL '24' MONTH OR estoque.est > 0;"""
 
-usuario = """/*Lembrando que a tabela de usuarios fica em outra base de dados "Checkout"
-então necessario exporta a tabela desse banco e colocar junto com o banco "estoque"*/
+usuario = """
 INSERT INTO Imp_Usuario (
   ID,
   Login,
@@ -26,7 +25,7 @@ SELECT
     usucodigo||'.'||usunome AS Login,
     '123' AS Senha,
     usunome AS Apelido
-FROM usuarios"""
+FROM usuarios;"""
 
 unidadeNegocio = """INSERT INTO imp_unidadenegocio (
     ID,
@@ -60,7 +59,7 @@ SELECT
     SUBSTRING(UPPER(TRIM(empcidade)),1,30) AS Cidade,
     ufcodigo AS Estado,
     regexp_replace(empfone, '[^0-9]', '', 'g') AS Telefone
-FROM empresa"""
+FROM empresa;"""
 
 grupoRemarcacao = """select"""
 
@@ -72,7 +71,9 @@ SELECT
     pavcodigo AS ID,
     UPPER(SUBSTRING(TRIM(pavdescricao),1,130)) AS Nome
 FROM principioativo
-LEFT JOIN Imp_PrincipioAtivo ON Imp_PrincipioAtivo.id  = principioativo.pavcodigo::VARCHAR"""
+LEFT JOIN Imp_PrincipioAtivo ON Imp_PrincipioAtivo.id  = principioativo.pavcodigo::VARCHAR
+WHERE Imp_PrincipioAtivo.ID IS NULL;
+"""
 
 fabricanteNaoInformado = """INSERT INTO Imp_Fabricante(ID,Nome,Tipo) VALUES('-1', 'FABRICANTE NÃO INFORMADO', 'J');"""
 
@@ -89,7 +90,8 @@ SELECT
 FROM pessoa
 JOIN pesjuridica ON pesjuridica.pescodigo = pessoa.pescodigo
 LEFT JOIN Imp_Fabricante ON Imp_Fabricante.ID = pessoa.pescodigo::VARCHAR
-WHERE pesfornecedor = 'S'"""
+WHERE pesfornecedor = 'S' AND imp_fabricante.id IS NULL;
+"""
 
 classficacao = """--CLASSIFICAÇÃO RAIZ
 INSERT INTO Imp_Classificacao (id, nome, profundidade, principal) VALUES ('RAIZ', 'PRINCIPAL', 0, TRUE);
@@ -108,7 +110,7 @@ SELECT
 FROM classmerc
 WHERE clmnivel = '1';
 
-        -- NIVEL 2
+-- NIVEL 2
 INSERT INTO imp_classificacao (id, nome, profundidade, principal, imp_classificacaopaiid) 
 SELECT 
 clmcodigo AS id, 
@@ -184,7 +186,9 @@ LEFT JOIN imp_produto ON imp_produto.id = produto.procodigo
 LEFT JOIN perfilpis perfilpissn ON perfilpissn.piscst = produto.stpcodigo AND perfilpissn.tipocontribuinte = 'B'
 LEFT JOIN perfilcofins perfilcofinssn ON perfilcofinssn.cofinscst = produto.stccodigo AND perfilcofinssn.tipocontribuinte = 'B'
 LEFT JOIN perfilpis ON perfilpis.piscst =  produto.stpcodigo AND perfilpis.tipocontribuinte = 'A'
-LEFT JOIN perfilcofins ON perfilcofins.cofinscst = produto.stccodigo AND perfilcofins.tipocontribuinte = 'A'"""
+LEFT JOIN perfilcofins ON perfilcofins.cofinscst = produto.stccodigo AND perfilcofins.tipocontribuinte = 'A'
+WHERE imp_produto.id IS NULL;
+"""
 
 produtoMae = """INSERT INTO Imp_Produto(
     ID,
@@ -240,7 +244,9 @@ JOIN produto ON produto.procodigo = imp_produto.id
 LEFT JOIN proembala ON proembala.procodigo = produto.procodigo AND preembalagemvenda = 'N'
 LEFT JOIN procodbarra ON procodbarra.precodigo = proembala.precodigo
 LEFT JOIN imp_produto imp_pro ON imp_pro.id = '-' || imp_produto.ID
-WHERE proembala.prequantidade > '1'"""
+WHERE proembala.prequantidade > '1'
+AND imp_produto.id IS NULL;
+"""
 
 codigoDeBarrasAdicional = """INSERT INTO imp_codigobarras(
   codigobarras,
@@ -253,7 +259,9 @@ LEFT JOIN proembala ON proembala.procodigo = produto.procodigo
 LEFT JOIN procodbarra ON procodbarra.precodigo = proembala.precodigo
 JOIN imp_produto ON imp_produto.id = produto.procodigo
 LEFT JOIN imp_codigobarras ON imp_codigobarras.codigobarras = SUBSTRING(regexp_replace(ltrim(procodbarra.codbarra, '0'), '[^0-9]','','g'), 1,14)
-WHERE imp_produto.codigobarras <> SUBSTRING(regexp_replace(ltrim(procodbarra.codbarra, '0'), '[^0-9]','','g'), 1,14)"""
+WHERE imp_produto.codigobarras <> SUBSTRING(regexp_replace(ltrim(procodbarra.codbarra, '0'), '[^0-9]','','g'), 1,14)
+AND imp_codigobarras.codigobarras IS NULL;
+"""
 
 duploPerfilImcs = """select"""
 
@@ -311,7 +319,7 @@ FROM icmsproduto
 LEFT JOIN imp_icmsproduto ON imp_icmsproduto.imp_produtoid = icmsproduto.imp_produtoid AND imp_icmsproduto.estado = icmsproduto.estado
 WHERE imp_icmsproduto.imp_produtoid IS NULL;"""
 
-fornencedor = """#Rodar no Dia 2
+fornencedor = """
 INSERT INTO Imp_Fornecedor(
     ID,
     Nome,
@@ -343,7 +351,9 @@ SELECT
 FROM pessoa
 LEFT JOIN pesjuridica ON pesjuridica.pescodigo = pessoa.pescodigo
 LEFT JOIN pesfisica ON pessoa.pescodigo = pesfisica.pescodigo
-WHERE pessoa.pesfornecedor = 'S'"""
+WHERE pessoa.pesfornecedor = 'S'
+AND Imp_Fornecedor.ID IS NULL;
+"""
 
 
 planoPagamento = """/*Plano de pagamento no sistema é colocado no cliente, como na importação nao tem como importa direto no cliente estamos fazendo a importação dos planos que é feito no cliente 
@@ -512,7 +522,9 @@ LEFT JOIN cartaocliente ON cartaocliente.pescodigo = pessoa.pescodigo
 LEFT JOIN pesfisica ON pessoa.pescodigo = pesfisica.pescodigo
 LEFT JOIN pesjuridica ON pessoa.pescodigo = pesjuridica.pescodigo
 LEFT JOIN imp_crediario ON imp_crediario.id = pescliente.grccodigo::VARCHAR
-LEFT JOIN imp_cliente ON imp_cliente.id = pescliente.pescodigo::VARCHAR"""
+LEFT JOIN imp_cliente ON imp_cliente.id = pescliente.pescodigo::VARCHAR
+WHERE Imp_Cliente.ID IS NULL;
+"""
 
 enderecoCliente = """INSERT INTO imp_cliente_endereco(
     id,
@@ -535,7 +547,8 @@ SELECT
 FROM pescliente
 LEFT JOIN pessoa ON pescliente.pescodigo = pessoa.pescodigo
 JOIN Imp_Cliente ON Imp_Cliente.ID = pescliente.pescodigo::VARCHAR
-WHERE pessoa.pesendereco IS NOT NULL"""
+WHERE pessoa.pesendereco IS NOT NULL;
+"""
 
 dependenteCliente = """select"""
 
