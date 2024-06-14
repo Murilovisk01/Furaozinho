@@ -404,9 +404,9 @@ SELECT
 	prmdatainicio AS DataHoraInicial, 
 	prmdatafim AS DataHoraFinal
 FROM promocao
-WHERE prmstatus = 'A';"""
+WHERE prmstatus = 'A';
 
-itemCadernoOferta = """INSERT INTO Imp_ItemCadernoOferta(
+INSERT INTO Imp_ItemCadernoOferta(
     Imp_CadernoOfertaID,
     Imp_ProdutoID,
     TipoOferta,
@@ -438,7 +438,15 @@ SELECT
 FROM ITEMPROMOCAO
 JOIN imp_produto ON imp_produto.id = ITEMPROMOCAO.procodigo::VARCHAR
 JOIN imp_cadernooferta ON imp_cadernooferta.id = ITEMPROMOCAO.prmcodigo::VARCHAR;
- """
+"""
+
+cadernoDeOfertaQuantidade = """select"""
+
+cadernoDeOfertaLevePague = """select"""
+
+cadernoDeOfertaClassificacao = """select"""
+
+cadernoDeOfertaUnidade = """select"""
 
 crediario = """                                                        --CREDIÁRIO AVISTA
 INSERT INTO Imp_Crediario (ID, NomeCrediario, LimitePadraoCliente, Imp_PlanoPagamentoID) VALUES ('AVISTA', 'AVISTA', 0, '0');
