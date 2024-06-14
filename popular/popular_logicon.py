@@ -17,7 +17,7 @@ query_names = {
     principioAtivo: "Princípio Ativo",
     fabricanteNaoInformado: "Fabricante Não Informado",
     fabricante: "Fabricante",
-    classficacao: "Classificação Raiz",
+    classficacao: "Classificação",
     produto: "Produto",
     produtoMae: "Produto Mãe",
     codigoDeBarrasAdicional: "Código de Barras Adicional",
