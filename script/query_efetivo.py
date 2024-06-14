@@ -112,7 +112,7 @@ INSERT INTO imp_produto (
 )
 SELECT 
 	produtos.cod_produto AS id,
-	produtos.descricao AS descricao,
+	SUBSTRING(produtos.descricao,1,60) AS descricao,
 	COALESCE(imp_fabricante.id, '0') AS imp_fabricanteid,
 	ean13_1 AS codigobarras,
 	CASE
@@ -198,7 +198,7 @@ FROM fornecedores
 LEFT JOIN imp_fornecedor ON imp_fornecedor.id = fornecedores.cod_fornecedor
 WHERE imp_fornecedor.id IS NULL;"""
 
-planoPagamento = """-- PARTICULAR
+planoPagamento = """--PARTICULAR
 INSERT INTO Imp_PlanoPagamento (ID, Nome, MinParcela, MaxParcela, TipoIntervaloEntrada, IntervaloEntrada, TipoIntervaloParcela, IntervaloParcela) VALUES ('0', '0.PARTICULAR', 1, 1, 'M', 1, 'M', 1);
 
 -- Planos de Pagamento dos Crediários
@@ -221,7 +221,7 @@ SELECT
 	1 AS intervaloentrada,
 	'M' AS tipointervaloparcela,
 	1 AS intervaloparcela
-FROM convenios 
+FROM convenios; 
 
 
 -- Fechamentos dos Planos de Pagamento
@@ -237,7 +237,8 @@ SELECT
 	dia_vencimento::INT AS diafechamento,
 	dia_vencimento::INT AS diavencimento
 FROM convenios
-JOIN imp_planopagamento ON imp_planopagamento.id = convenios.cod_convenio"""
+JOIN imp_planopagamento ON imp_planopagamento.id = convenios.cod_convenio;
+"""
 
 cadernoDeOferta = """-- CADERNO DE OFERTAS POR PREÇO OFERTA
 INSERT INTO IMP_CadernoOferta (ID, Nome) VALUES ('PRECOPROMOCAO', 'PREÇO PROMOÇÃO');
