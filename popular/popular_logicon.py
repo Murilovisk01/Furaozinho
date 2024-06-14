@@ -3,10 +3,10 @@ import time
 from psycopg2 import sql, DatabaseError
 import psycopg2
 from database_connector import DatabaseConnector
-from script.query_logicon import  ( tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, 
-    classficacao, produto, produtoMae, codigoDeBarrasAdicional,duploPerfilImcs,impostoLucroPresumido,impostoSimples, fornencedor, planoPagamento,
-    cadernoDeOferta, itemCadernoOferta, crediario, cliente, enderecoCliente, 
-    dependenteCliente, planoRemuneracao,prescritores, crediarioReceber, custo, estoque, contasAPagar, demanda )
+from script.query_logicon import  (tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, 
+    produto, produtoMae, codigoDeBarrasAdicional,duploPerfilImcs,impostoLucroPresumido, impostoSimples, fornencedor, 
+    planoPagamento, cadernoDeOferta, cadernoDeOfertaQuantidade,cadernoDeOfertaLevePague, cadernoDeOfertaClassificacao,cadernoDeOfertaUnidade, 
+    crediario, cliente,  dependenteCliente, planoRemuneracao, prescritores, crediarioReceber, custo, estoque, contasAPagar, demanda )
 
 # Dicionário mapeando as consultas para nomes legíveis
 query_names = {
