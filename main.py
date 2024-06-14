@@ -4,7 +4,7 @@ from selecionarDia import EscolhaSistema
 def main ():
 
         # Pede ao usuário para inserir o nome do banco de dados
-    db_name = input("Qual é o nome da base de dados que deseja manipular? ")
+    db_name = input("Qual é o nome da base de dados que deseja manipular?\n: ")
 
     # Configuração dos bancos de dados
     source_db_config = {
