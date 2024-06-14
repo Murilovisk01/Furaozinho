@@ -72,7 +72,7 @@ def popular_dia1(source_db_config):
                 tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, 
                 produto, produtoMae, codigoDeBarrasAdicional, fornencedor, 
                 planoPagamento, cadernoDeOferta, cadernoDeOfertaQuantidade,cadernoDeOfertaLevePague, cadernoDeOfertaClassificacao,cadernoDeOfertaUnidade, 
-                crediario, cliente,  dependenteCliente, planoRemuneracao, prescritores,
+                crediario, cliente,  dependenteCliente, planoRemuneracao, prescritores
                 ]
 
                 for query in queries:
