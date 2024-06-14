@@ -68,9 +68,10 @@ def popular_dia1(source_db_config):
 
             with source_conn.cursor() as source_cursor:
                 # Lista de consultas a serem executadas
-                queries = [tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, produto, produtoMae, codigoDeBarrasAdicional,
-                fornencedor, planoPagamento, cadernoDeOferta, itemCadernoOferta, crediario, cliente, enderecoCliente, dependenteCliente, planoRemuneracao,
-                prescritores]
+                queries = [tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, 
+                produto, produtoMae, codigoDeBarrasAdicional, fornencedor, 
+                planoPagamento, cadernoDeOferta, cadernoDeOfertaQuantidade,cadernoDeOfertaLevePague, cadernoDeOfertaClassificacao,cadernoDeOfertaUnidade, 
+                crediario, cliente,  dependenteCliente, planoRemuneracao, prescritores]
 
                 for query in queries:
                     try:
