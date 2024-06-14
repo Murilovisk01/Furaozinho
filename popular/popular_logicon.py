@@ -68,10 +68,10 @@ def popular_dia1(source_db_config):
 
             with source_conn.cursor() as source_cursor:
                 # Lista de consultas a serem executadas
-                queries = [tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, 
+                queries = list(dict.fromkeys([tmp_produto, usuario, unidadeNegocio, grupoRemarcacao, principioAtivo, fabricanteNaoInformado, fabricante, classficacao, 
                 produto, produtoMae, codigoDeBarrasAdicional, fornencedor, 
                 planoPagamento, cadernoDeOferta, cadernoDeOfertaQuantidade,cadernoDeOfertaLevePague, cadernoDeOfertaClassificacao,cadernoDeOfertaUnidade, 
-                crediario, cliente,  dependenteCliente, planoRemuneracao, prescritores]
+                crediario, cliente,  dependenteCliente, planoRemuneracao, prescritores]))
 
                 for query in queries:
                     try:
@@ -136,10 +136,10 @@ def popular_dia2(source_db_config):
 
             with source_conn.cursor() as source_cursor:
                 # Lista de consultas a serem executadas
-                queries = [
+                queries = list(dict.fromkeys([
                     tmp_produto,principioAtivo,fabricante, produto, produtoMae,
                     codigoDeBarrasAdicional, custo, estoque, contasAPagar, demanda, crediarioReceber
-                ]
+                ]))
 
                 for query in queries:
                     try:
