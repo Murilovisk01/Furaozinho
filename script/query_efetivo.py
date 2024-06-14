@@ -511,7 +511,7 @@ WHERE imp_cliente_endereco.id IS NULL;"""
 dependenteCliente = """select"""
 
 planoRemuneracao = """-- PLANO REMUNERAÇÃO
-INSERT INTO imp_planoremu (ID, Nome, DataInicial, DataFinal, ConsiderarDevolucao) VALUES ('PLANO DE REMUNERAÇÃO POR COMISSÃO', 'PLANO DE REMUNERAÇÃO POR COMISSÃO', NOW(), NOW() + INTERVAL '1 year', TRUE);
+INSERT INTO imp_planoremu (ID, Nome, DataInicial, DataFinal, ConsiderarDevolucao) VALUES ('PLANO DE REMUNERAÇÃO POR COMISSÃO', 'PLANO DE REMUNERAÇÃO', NOW(), NOW() + INTERVAL '1 year', TRUE);
 
 -- ITENS DO PLANO DE REMUNERAÇÃO POR COMISSÃO 
 INSERT INTO imp_planoremucomissao (
