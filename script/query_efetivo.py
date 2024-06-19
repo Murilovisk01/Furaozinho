@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 tmp_produto = """DROP TABLE IF EXISTS tmp_produtos;
 WITH produtos AS (
 	SELECT 

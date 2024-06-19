@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 tmp_produto = """DROP TABLE IF EXISTS tmp_produto;
 CREATE TABLE tmp_produto (ProdutoID VARCHAR(100) PRIMARY KEY);
 INSERT INTO tmp_produto
