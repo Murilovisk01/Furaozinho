@@ -1,9 +1,13 @@
 from selecionarDia import EscolhaSistema
+from update_checker import update_version
 
 
 def main ():
 
-        # Pede ao usuário para inserir o nome do banco de dados
+    #Iniciação do update
+    update_version()
+
+    # Pede ao usuário para inserir o nome do banco de dados
     db_name = input("Qual é o nome da base de dados que deseja manipular?\n: ")
 
     # Configuração dos bancos de dados
