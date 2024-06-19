@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 from selecionarDia import EscolhaSistema
 from update_checker import Update
 
