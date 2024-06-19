@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from selecionarDia import EscolhaSistema
 from update_checker import Update
 
