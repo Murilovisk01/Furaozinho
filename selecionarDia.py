@@ -1,4 +1,3 @@
-# selecionarDia.py
 # -*- coding: utf-8 -*-
 
 from popular.popular_Sim import SistemaSim, popular_dia1 as sim_dia1, popular_dia2 as sim_dia2
