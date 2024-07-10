@@ -483,7 +483,7 @@ JOIN Imp_PlanoPagamento ON Imp_PlanoPagamento.ID = convenios.cd_convenio
 WHERE dt_fechamento IS NOT NULL;
 """
 
-cadernoDeOferta = """INSERT INTO Imp_CadernoOferta(ID, Nome, DataHoraInicial, DataHoraFinal) VALUES (''OFERTAS LOJA '||Imp_UnidadeNegocio.codigo||''', ''OFERTAS LOJA '||Imp_UnidadeNegocio.codigo||''', NOW(), NOW() + interval ''1 year'');
+cadernoDeOferta = """INSERT INTO Imp_CadernoOferta(ID, Nome, DataHoraInicial, DataHoraFinal) VALUES ('OFERTAS LOJA 01', 'OFERTAS LOJA 01', NOW(), NOW() + interval '1 year');
 
 --ITENS DOS CADERNOS DE OFERTA DO TIPO PREÇO
 INSERT INTO Imp_ItemCadernoOferta(
