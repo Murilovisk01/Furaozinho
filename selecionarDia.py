@@ -4,7 +4,7 @@ from popular.popular_Sim import SistemaSim, popular_dia1 as sim_dia1, popular_di
 from popular.popular_logicon import SistemaLogicon, popular_dia1 as logicon_dia1, popular_dia2 as logicon_dia2
 from popular.popular_efetivo import SistemaEfetivo, popular_dia1 as efetivo_dia1, popular_dia2 as efetivo_dia2
 from popular.popular_infoMaster import SistemaInfoMaster, popular_dia1 as info_dia1, popular_dia2 as info_dia2
-
+from popular.popular_farmax import SistemaFarmax, popular_dia1 as farmax_dia1, popular_dia2 as farmax_dia2
 
 
 def EscolhaSistema(source_db_config, sistema):
@@ -44,5 +44,14 @@ def EscolhaSistema(source_db_config, sistema):
             info_dia2(source_db_config)
         else:
             print("Opção inválida. Por favor, escolha novamente.")   
+    elif sistema.lower()== "5":
+        sistema_farmax = SistemaFarmax(source_db_config)
+        opcao = input("Qual DIA deseja realizar\n1 - DIA 01\n2 - DIA 02\n:  ")
+        if opcao == '1':
+            farmax_dia1(source_db_config)
+        elif opcao == '2':
+            farmax_dia2(source_db_config)
+        else:
+            print("Opção inválida. Por favor, escolha novamente.")  
     else:
         print("Sistema inválido.")

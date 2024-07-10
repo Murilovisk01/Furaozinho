@@ -22,7 +22,7 @@ def main ():
     }
 
     # Migra dados
-    sistema = input("""Qual sistema deseja manipular?\n1 - Sistema SIM\n2 - Sistema LOGICON\n3 - Sistema EFETIVO\n4 - Sistema INFOMASTER\n:   """)
+    sistema = input("""Qual sistema deseja manipular?\n1 - Sistema SIM\n2 - Sistema LOGICON\n3 - Sistema EFETIVO\n4 - Sistema INFOMASTER\n5 - Sistema FARMAX\n :  """)
     EscolhaSistema(source_db_config, sistema)
 
 if __name__ == "__main__":
