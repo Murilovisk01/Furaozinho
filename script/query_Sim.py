@@ -1047,7 +1047,7 @@ INSERT INTO imp_planoremucomissao (
   Imp_PlanoRemuID,
   Imp_ProdutoID,
   Comissao)
-SELECT DISTINCT
+SELECT DISTINCT ON (imp_produtoid)
   imp_planoremu.id AS imp_planoremuid,
   imp_produto.id AS imp_produtoid,
   COMISSAOPRO.percom AS comissao
